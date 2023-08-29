@@ -225,23 +225,27 @@ $(eval PULP_APP_LDFLAGS_$(1) += $(PULP_ARCH_LDFLAGS) $(PULP_LDFLAGS) $(PULP_APP_
 
 $(TARGET_BUILD_DIR)/$(1)/%.o: %.c
 	@echo "CC  $$<"
+	@echo "c- compilation"
 	$(V)mkdir -p `dirname $$@`
 	$(V)$(PULP_CC) -c $$< -o $$@ -MMD -MP $(PULP_APP_CFLAGS_$(1))
 
 $(TARGET_BUILD_DIR)/$(1)/%.o: %.cpp
 	@echo "CXX $$<"
+	@echo "cpp- compilation"
 	$(V)mkdir -p `dirname $$@`
 	$(V)$(PULP_CC) -c $< -o $@ -MMD -MP $(PULP_APP_CFLAGS_$(1))
 
 $(TARGET_BUILD_DIR)/$(1)/%.o: %.S
 	@echo "CC  $$<"
+	@echo "s- compilation"
 	$(V)mkdir -p `dirname $$@`
 	$(V)$(PULP_CC) -c $$< -o $$@ -MMD -MP -DLANGUAGE_ASSEMBLY $(PULP_APP_CFLAGS_$(1))
 
 $(TARGET_BUILD_DIR)/$(1)/$(1): $(PULP_APP_OBJS_$(1))
 	@echo "LD  $$@"
+	@echo "ld- compilation"
 	$(V)mkdir -p `dirname $$@`
-	$(V)$(PULP_LD) -o $$@ $$^ -MMD -MP $(PULP_APP_LDFLAGS_$(1))
+	$(V)$(PULP_LD) -lc -o $$@ $$^ -MMD -MP $(PULP_APP_LDFLAGS_$(1))
 
 $(TARGET_INSTALL_DIR)/bin/$(1): $(TARGET_BUILD_DIR)/$(1)/$(1)
 	@echo "CP  $$@"
