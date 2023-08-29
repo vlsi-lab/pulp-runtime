@@ -67,7 +67,6 @@ PULP_SRCS     += kernel/chips/pulpissimo/soc.c
 #KECCAK_IP
 PULP_SRCS     += drivers/keccak_driver.c
 
-PULP_SRCS     += kernel/keccak/keccak.c
 
 include $(PULPRT_HOME)/rules/pulpos/configs/default.mk
 
