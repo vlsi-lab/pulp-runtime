@@ -28,6 +28,9 @@
 #include <hal/pulp.h>
 #include <data/data.h>
 
+#include "keccak/keccak_auto.h"
+#include "keccak/keccak_driver.h"
+
 typedef enum {
   PI_FREQ_DOMAIN_FC     = 0,
   PI_FREQ_DOMAIN_CL     = 1,
