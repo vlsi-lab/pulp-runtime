@@ -43,11 +43,9 @@ void get_result(uint32_t* Dout){
 
 
 void KeccakF1600_StatePermute(uint32_t Din[50], uint32_t Dout[50] ){
-  printf("\nKeccak driver!\n");
 	set_input(Din);
 	trigger_keccak();
 	poll_done();
 	get_result(Dout);	
-  printf("\nBy Keccak driver!\n");
 
 }
