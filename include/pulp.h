@@ -39,7 +39,7 @@
 
 
 //KYBER768
-#include "kyber768/api.h"
+/*#include "kyber768/api.h"
 #include "kyber768/cbd.h"
 #include "kyber768/fips202.h"
 #include "kyber768/indcpa.h"
@@ -52,9 +52,10 @@
 #include "kyber768/reduce.h"
 #include "kyber768/symmetric.h"
 #include "kyber768/verify.h"
+*/
 
 //KYBER512
-/*#include "kyber512/api.h"
+#include "kyber512/api.h"
 #include "kyber512/cbd.h"
 #include "kyber512/fips202.h"
 #include "kyber512/indcpa.h"
@@ -66,7 +67,7 @@
 #include "kyber512/randombytes.h"
 #include "kyber512/reduce.h"
 #include "kyber512/symmetric.h"
-#include "kyber512/verify.h"*/
+#include "kyber512/verify.h"
 
 //KYBER1024
 /*
