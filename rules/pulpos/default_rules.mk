@@ -41,15 +41,19 @@ VPATH = $(PULPRT_HOME)
 include $(PULPRT_HOME)/rules/pulpos/src.mk
 
 PULP_CFLAGS += $(PULPRT_CONFIG_CFLAGS)
-PULP_CFLAGS += -fno-jump-tables -fno-tree-loop-distribute-patterns
+PULP_CFLAGS += -fno-jump-tables -fno-tree-loop-distribute-patterns 
 
 ifeq '$(CONFIG_LIBC_MINIMAL)' '1'
 PULP_APP_CFLAGS += -I$(PULPRT_HOME)/lib/libc/minimal/include
 endif
+
 PULP_APP_CFLAGS += -I$(PULPRT_HOME)/include -I$(PULPRT_HOME)/kernel
 
 #ADDITION FOR H-FILE
 PULP_APP_CFLAGS += -I$(PULPRT_HOME)/include/keccak
+PULP_APP_CFLAGS += -I$(PULPRT_HOME)/include/ntt_intt_pwm
+
+PULP_APP_CFLAGS += -I$(PULPRT_HOME)/include/kyber768
 
 PULP_APP_CFLAGS += $(foreach inc,$(PULPOS_MODULES),-I$(inc)/include)
 
@@ -211,6 +215,8 @@ endif
 # PULP_APPS
 #
 
+
+
 define declare_app
 
 $(eval PULP_APP_SRCS_$(1) += $(PULP_APP_SRCS)$(PULP_APP_FC_SRCS) $(PULP_SRCS) $(PULP_APP_CL_SRCS) $(PULP_CL_SRCS))
@@ -343,14 +349,8 @@ endif
 endif
 
 ifeq '$(platform)' 'fpga'
-launch_fpga:
-	@echo "file $(TARGETS)" > $@
-	@echo "target remote :3333" >> $@
-	@echo "monitor reset halt" >> $@
-	@echo "load" >> $@
-	@echo "c" >> $@
-run: launch_fpga
-	/opt/riscv/bin/riscv32-unknown-elf-gdb -x launch_fpga
+run:
+	$(PULPRT_HOME)/bin/elf_run_genesys2.sh $(TARGETS)
 endif
 
 dis:
